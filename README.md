@@ -121,13 +121,20 @@ In CMake there is a built in concept of build type. A build type will select var
 To select a build type you set the CMAKE_BUILD_TYPE cache variable. This can be done either in the CMakeCache.txt file or by using the -D option.
 
 ```
-cmake -CCMAKE_BUILD_TYPE=Release ..
+cmake -DCMAKE_BUILD_TYPE=Release ..
 ```
 
 There are many per-config properties and variables that specify options depending on the CMAKE_BUILD_TYPE variable. These follow the pattern of <VARIABLE>_<CONFIG>, for instance CMAKE_C_FLAGS_RELEASE. We can use this pattern to create custom build types.
 
 ```
-cmake -CCMAKE_BUILD_TYPE=Custom -DCMAKE_C_FLAGS_CUSTOM="-O1 -Wall" ..
+cmake -DCMAKE_BUILD_TYPE=Custom -DCMAKE_C_FLAGS_CUSTOM="-O1 -Wall" ..
+```
+
+Building multiple configurations is typically done by generating into separate directories. This can be done from the source directory using the following commands.
+
+```
+cmake -H. -Bbuilds/Debug -DCMAKE_BUILD_TYPE=Debug
+cmake -H. -Bbuilds/Release -DCMAKE_BUILD_TYPE=Release
 ```
 
 Selecting Compiler and flags
