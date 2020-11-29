@@ -156,8 +156,8 @@ References
 ----------
 These are some good references to learn more about CMake.
 
-https://cgold.readthedocs.io/en/latest/index.html
-https://gitlab.kitware.com/cmake/community/-/wikis/FAQ
-https://cmake.org/cmake/help/latest/manual/cmake-language.7.html
-https://cliutils.gitlab.io/modern-cmake/
-https://gist.github.com/mbinna/c61dbb39bca0e4fb7d1f73b0d66a4fd1
+* https://cgold.readthedocs.io/en/latest/index.html
+* https://gitlab.kitware.com/cmake/community/-/wikis/FAQ
+* https://cmake.org/cmake/help/latest/manual/cmake-language.7.html
+* https://cliutils.gitlab.io/modern-cmake/
+* https://gist.github.com/mbinna/c61dbb39bca0e4fb7d1f73b0d66a4fd1
