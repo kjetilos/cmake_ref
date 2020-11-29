@@ -110,9 +110,27 @@ CMake reserves identifiers that begin with CMAKE_, _CMAKE_ or begine with _ foll
 
 Environment variables are like ordinary variables in CMake. They have a global scope in a CMake process and they are never cached. Variable references have the form of $ENV{<name>}. Initial values of the CMake environment variables are those of the calling process. Values can be changed by using set() and unset() commands.
 
-When running cmake from the command line we can assign values to variables using the `-D<VARIABLE:TYPE>=<VALUE>` syntax. In this way we can set values in the cache.
+Useful Variables
+----------------
+CMAKE_SOURCE_DIR - Root of the source tree
+CMAKE_CURRENT_SOURCE_DIR - Full path of currently processed node
+CMAKE_CURRENT_LIST_DIR - Path of current CMake file directory
+CMAKE_CURRENT_LIST_FILE - Full path of current CMake file
 
+
+CMake Cache
+-----------
 The CMake cache is sort of the place where CMake configuration values are kept. When running CMake the first time it produces a CMakeCache.txt file. After CMake has created this file you can edit the file directly.
+
+When running cmake from the command line we can assign values to variables using the `-D<VARIABLE:TYPE>=<VALUE>` syntax. In this way we can set values in the cache. When there are many cache values to set we can use a file with a list of set() function setting the initial cache entry values. This file can be loaded using the -C option.
+
+```
+cmake -C init/cache.cmake
+```
+
+The cache entries can be given types and enumerations, this is mostly used as gui hints. The option() command can be used to add boolean cache entries.
+
+Cache entries should be prefixed with the name of the project because they are global. 
 
 Build Configurations
 --------------------
@@ -153,7 +171,7 @@ cmake -D CMAKE_C_COMPILER=gcc-8 ..
 
 Install
 -------
-To install a project we can use the --intall option to cmake.
+To install a project we can use the install target created by the generator. Newer versions of CMake can use the --intall option to the cmake command.
 
 ```
 cmake --install . --prefix "/home/me/opt"

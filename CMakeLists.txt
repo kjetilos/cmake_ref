@@ -96,3 +96,44 @@ if(${DEMO_ENABLE})
     src/demo.c)
 endif()
 
+function(foo_func)
+  # This variable it only visible inside this function
+  # note that include() and macro() do not introduce new scope
+  set(foo_var "123")
+  message("[foo_func] ${foo_var}")
+endfunction()
+
+foo_func("argument")
+
+function(print_name var)
+  message("${var}=${${var}}")
+endfunction()
+
+set(my_dir "foo/bar")
+print_name(my_dir)
+
+# Using standard modules
+include(ProcessorCount)
+ProcessorCount(N)
+message("Number of processors: ${N}")
+
+# Here is an example of how to add custom cmake modules
+# generally custom modules should be prefixed with project name to create
+# a namespace.
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/modules")
+include(MyModule)
+
+add_executable(foo_test src/main.c)
+enable_testing()
+add_test(NAME mytest COMMAND foo_test)
+
+# This is an example of a library. Note that we do not specify STATIC or SHARED
+# by not specifying it we make it a choice to the user. The user can enable it 
+# setting the -DBUILD_SHARED_LIBS=ON setting.
+add_library(foo src/foo.c)
+install(
+  TARGETS foo
+  LIBRARY DESTINATION lib
+  ARCHIVE DESTINATION lib
+  RUNTIME DESTINATION bin
+)
